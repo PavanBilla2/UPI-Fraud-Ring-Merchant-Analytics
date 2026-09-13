@@ -1,0 +1,16 @@
+metric,value
+Total Transactions,20000.0
+Total Transaction Value,214057673.29999998
+Average Transaction Value,11892.753669648313
+Successful Transactions,17053.0
+Failed Transactions,1955.0
+Pending Transactions,992.0
+Chargeback Transactions,2451.0
+Fraud/Unauthorized Chargeback Transactions,873.0
+High-Value Transactions,879.0
+High-Risk Users,686.0
+KYC Rejected/Failed Transactions,491.0
+Risky Merchant Status Transactions,738.0
+HIGH Risk Transactions,788.0
+CRITICAL Risk Transactions,94.0
+HIGH + CRITICAL Risk Transactions,882.0
