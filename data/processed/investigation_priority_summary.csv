@@ -1,0 +1,4 @@
+investigation_priority,transaction_count,total_transaction_value,fraud_chargeback_cases,identity_anomaly_cases,repeated_chargeback_user_cases,high_chargeback_merchant_cases,high_risk_user_cases
+P1 - Immediate Review,94,994151.62,94,60.0,39,30,9
+P2 - High Priority,779,8470152.52,779,0.0,68,24,23
+P3 - Review,9,134370.12,0,7.0,8,5,1
