@@ -1,10 +1,3 @@
-data/raw/
-data/processed/kyc_clean.csv
-data/processed/fact_transactions_enriched.csv
 .ipynb_checkpoints/
 __pycache__/
 *.pyc
-data/processed/chargebacks_clean.csv
-data/processed/merchants_clean.csv
-data/processed/network_edges.csv
-data/processed/transactions_clean.csv
