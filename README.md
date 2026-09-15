@@ -1,228 +1,231 @@
-# UPI Fraud Ring and Merchant Analytics
+# UPI Fraud Ring & Merchant Analytics
 
-A Streamlit-based fraud analytics dashboard for studying UPI transactions, chargebacks, merchant risk, user risk, and suspicious transaction networks.
+An explainable fraud-intelligence platform for analysing UPI transaction activity, chargebacks, merchant risk, user behaviour, and suspicious transaction networks.
 
-About the Project
+Built for the **FinTech & BFSI** track, this project brings together data engineering, risk analytics, network analysis, and an interactive Streamlit dashboard into one workflow designed for practical fraud investigation.
 
-We built this project to answer a simple question:
+---
 
-How can we quickly identify transactions and entities that need further investigation?
+## Why this project?
 
-We worked with transaction, KYC, merchant, and chargeback data. After cleaning and validating the data, we created risk indicators and an explainable risk score. These results are shown through an interactive dashboard.
+Fraud teams rarely have the time to investigate every transaction manually. The challenge is to identify the transactions, users, merchants, and connected activity that deserve attention first — and to explain why they were prioritised.
 
-The system is meant to support investigation. A high risk score does not mean that fraud is confirmed.
+This project addresses that problem by combining multiple observable signals such as:
 
-Main Features
+- chargebacks and unauthorized-transaction evidence
+- repeated chargeback behaviour
+- identity anomalies
+- KYC failures
+- transaction velocity
+- high-value activity
+- merchant risk indicators
+- user and merchant relationships
 
-Executive Overview
+Instead of treating a single signal as proof of fraud, the platform combines them into an **explainable risk score** that helps investigators focus on the strongest leads.
 
-Shows the main transaction, chargeback, and risk KPIs.
+> **Important:** The risk score is an investigation-prioritisation mechanism, not a probability of fraud. HIGH and CRITICAL records are investigation leads, not automatically confirmed fraud.
 
-Fraud Investigation
+---
 
-Helps filter and review high-priority transactions and their risk signals.
+## What the dashboard provides
 
-Merchant Intelligence
+The application is organised as a fraud-intelligence workspace rather than a collection of isolated charts.
 
-Shows merchant activity, chargeback ratios, fraud evidence, and merchant categories.
+### Executive Overview
+A high-level command centre for monitoring transaction volume, transaction value, chargebacks, fraud evidence, and overall risk exposure.
 
-User Risk Intelligence
+### Fraud Investigation
+A focused workspace for reviewing high-priority cases, understanding the signals behind their risk scores, and filtering investigation evidence.
 
-Shows user-level risk, KYC issues, and identity-related risk signals.
+### Merchant Intelligence
+A deeper look at merchant behaviour, transaction concentration, chargeback exposure, fraud evidence, and category-level risk.
 
-Fraud Network Analysis
+### User Risk Intelligence
+User and KYC-focused analysis covering high-risk users, identity anomalies, repeated chargeback behaviour, and related risk indicators.
 
-Looks at connected user–merchant activity and highlights suspicious network clusters for investigation.
+### Fraud Network Analysis
+A relationship view of users and merchants designed to surface suspicious connected activity and rank network components for further investigation.
 
-Trends & Analytics
+### Trends & Analytics
+Time-based analysis of transaction activity, chargebacks, and risk signals to help identify changing patterns.
 
-Shows how transactions, chargebacks, and risk indicators change over time.
+### Methodology
+A transparent explanation of the data preparation process, risk framework, assumptions, and interpretation guidelines.
 
-Methodology
+---
 
-Explains the data preparation and risk-scoring approach used in the project.
+## Key results
 
-Key Results
+The current analytical layer contains:
 
-Metric
+| Metric | Result |
+|---|---:|
+| Transactions | **20,000** |
+| Total transaction value | **₹214.06M** |
+| Average transaction value | **₹11,893** |
+| Successful transactions | **17,053** |
+| Failed transactions | **1,955** |
+| Pending transactions | **992** |
+| Chargeback transactions | **2,451** |
+| Fraud/unauthorized chargeback evidence | **873** |
+| High-value transactions | **879** |
+| High-risk users | **686** |
+| KYC rejected/failed transaction records | **491** |
+| Risky merchant-status transaction records | **738** |
+| HIGH-risk transactions | **788** |
+| CRITICAL-risk transactions | **94** |
+| HIGH + CRITICAL transactions | **882** |
+| HIGH + CRITICAL share | **4.41%** |
 
-Value
+These figures are based on the project's processed analytical datasets.
 
-Total transactions
+---
 
-20,000
+## Explainable risk scoring
 
-Total transaction value
+A key design decision in this project was to make the risk score understandable rather than treating it as a black box.
 
-₹214.06M
+Each transaction receives points for observable risk signals:
 
-Average transaction value
+| Risk signal | Weight |
+|---|---:|
+| Fraud/Unauthorized chargeback | +30 |
+| Chargeback | +15 |
+| Strong identity anomaly | +15 |
+| Repeated chargeback user | +10 |
+| High-chargeback merchant | +10 |
+| High-risk user | +5 |
+| KYC rejected/failed transaction | +5 |
+| Velocity anomaly | +5 |
+| High-value transaction | +3 |
+| Merchant status risk | +2 |
 
-₹11,893
+### Risk bands
 
-Successful transactions
+| Score | Risk band |
+|---:|---|
+| 0–19 | LOW |
+| 20–39 | MEDIUM |
+| 40–59 | HIGH |
+| 60+ | CRITICAL |
 
-17,053
+This scoring framework is intended to answer two questions:
 
-Failed transactions
+1. **Which records should investigators look at first?**
+2. **What observable signals contributed to that priority?**
 
-1,955
+It is deliberately not presented as a fraud-probability model.
 
-Pending transactions
+---
 
-992
+## Data preparation and validation
 
-Chargeback transactions
+The project follows a structured analytical workflow:
 
-2,451
+```text
+Raw Data
+   ↓
+Data Understanding
+   ↓
+Cleaning & Standardisation
+   ↓
+Join Validation
+   ↓
+Feature / Risk Signal Engineering
+   ↓
+Explainable Risk Scoring
+   ↓
+Merchant / User / Chargeback / Network Intelligence
+   ↓
+Interactive Dashboard
+```
 
-Fraud/unauthorized chargeback evidence
+The main source tables are transactions, KYC, merchants, and chargebacks.
 
-873
+### Join validation
 
-High-value transactions
+Unmatched records are preserved so that data-quality limitations remain visible instead of being silently discarded.
 
-879
+| Join | Match rate |
+|---|---:|
+| Transaction → KYC | **31.18%** |
+| Transaction → Merchant | **46.38%** |
+| Chargeback → Transaction | **93.11%** |
+| Chargeback → KYC | **28.82%** |
+| Chargeback → Merchant | **42.82%** |
 
-High-risk users
+These match rates represent **data coverage**, not evidence of fraud.
 
-686
+---
 
-HIGH-risk transactions
+## Suspicious network analysis
 
-788
+The project also examines shared user–merchant activity as a graph.
 
-CRITICAL-risk transactions
+The network layer is used to identify connected components with combinations of signals such as:
 
-94
+- transaction concentration
+- chargebacks
+- fraud/unauthorized chargeback evidence
+- risk scores
+- user and merchant participation
 
-HIGH + CRITICAL transactions
+The goal is to surface **network-level investigation leads** that may not be obvious from transaction-level analysis alone.
 
-882
+> A suspicious network component is not automatically a fraud ring. It requires analyst validation and additional evidence.
 
-Risk Scoring
+---
 
-We used a weighted scoring method based on observable risk signals.
+## FraudIQ Copilot
 
-Some of the main signals are:
+The dashboard includes **FraudIQ Copilot**, a floating project assistant designed specifically for this application.
 
-Signal
-
-Weight
-
-Fraud/Unauthorized chargeback
-
-+30
-
-Chargeback
-
-+15
-
-Strong identity anomaly
-
-+15
-
-Repeated chargeback user
-
-+10
-
-High-chargeback merchant
-
-+10
-
-High-risk user
-
-+5
-
-KYC rejected/failed transaction
-
-+5
-
-Velocity anomaly
-
-+5
-
-High-value transaction
-
-+3
-
-Merchant status risk
-
-+2
-
-Risk Bands
-
-LOW: 0–19
-
-MEDIUM: 20–39
-
-HIGH: 40–59
-
-CRITICAL: 60+
-
-The score is used to prioritize investigations. It is not a fraud probability.
-
-Data Validation
-
-We kept unmatched records instead of removing them so that data-coverage problems remained visible.
-
-Join
-
-Match Rate
-
-Transaction → KYC
-
-31.18%
-
-Transaction → Merchant
-
-46.38%
-
-Chargeback → Transaction
-
-93.11%
-
-Chargeback → KYC
-
-28.82%
-
-Chargeback → Merchant
-
-42.82%
-
-These match rates should not be treated as fraud indicators.
-
-FraudIQ Copilot
-
-The dashboard also includes FraudIQ Copilot, a small project assistant that works with the project's local data and definitions.
+The current implementation uses a **local project-intelligence engine**, so it does not depend on a paid external AI API.
 
 It can answer questions such as:
 
+```text
 How many HIGH and CRITICAL transactions are there?
-What is the risk scoring methodology?
+
+Explain the risk scoring methodology.
+
 Which merchants are highest risk?
+
 How does the Merchant Risk Quadrant work?
+
 How were suspicious networks identified?
+
+What are the key project metrics?
+
 Explain this project for my viva.
+```
 
-Technology
+The assistant is grounded in the project's analytical data and definitions and is designed to avoid presenting unsupported values as facts.
 
-Python
+---
 
-Pandas
+## Technology stack
 
-NumPy
+**Data & analytics**
+- Python
+- Pandas
+- NumPy
+- Jupyter Notebook
 
-Streamlit
+**Dashboard & visualization**
+- Streamlit
+- Plotly
 
-Plotly
+**Development & version control**
+- VS Code / Antigravity IDE
+- Git
+- GitHub
 
-Jupyter Notebook
+---
 
-Git & GitHub
+## Repository structure
 
-Project Structure
-
+```text
 UPI-Fraud-Ring-Merchant-Analytics/
 │
 ├── app/
@@ -239,69 +242,127 @@ UPI-Fraud-Ring-Merchant-Analytics/
 │   └── fraud_analytics.ipynb
 │
 ├── requirements.txt
+├── .gitignore
 └── README.md
+```
 
-Run the Project
+---
 
-Clone the repository:
+## Run locally
 
-git clone https://github.com/vikashkatiki/UPI-Fraud-Ring-Merchant-Analytics.git
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/PavanBilla2/UPI-Fraud-Ring-Merchant-Analytics.git
 cd UPI-Fraud-Ring-Merchant-Analytics
+```
 
-Install the dependencies:
+### 2. Create a virtual environment
 
+```bash
+python -m venv .venv
+```
+
+On Windows:
+
+```bash
+.venv\Scripts ctivate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-Run the dashboard:
+### 4. Start the dashboard
 
+```bash
 python -m streamlit run app/app.py
+```
 
 Open:
 
+```text
 http://localhost:8501
+```
 
-Limitations
+---
 
-This is a project-level fraud analytics solution, not a production fraud detection system.
+## Deployment
 
-The main limitations are:
+The application is deployed with **Streamlit Community Cloud**.
 
-Some KYC and merchant joins are incomplete.
+Current deployment configuration:
 
-The risk weights are designed for this project.
+```text
+Repository: PavanBilla2/UPI-Fraud-Ring-Merchant-Analytics
+Branch: main
+Entry point: app/app.py
+```
 
-HIGH and CRITICAL do not mean confirmed fraud.
+The processed datasets are part of the repository because the dashboard loads them when the application starts.
 
-Suspicious network clusters need human investigation.
+---
 
-The scoring framework would need further validation with labelled real-world fraud data.
+## Project limitations
 
-Future Improvements
+This solution is intended as an **analytics and investigation-support platform**, not as a production fraud-decision engine.
 
-With more time, we would like to:
+Some important limitations are:
 
-Validate the risk weights with labelled data
+- KYC and merchant join coverage is incomplete.
+- The risk framework is rule-based and project-specific.
+- Risk scores should not be interpreted as fraud probabilities.
+- Suspicious network structures require human validation.
+- Thresholds and weights would need calibration against labelled outcomes in a production setting.
+- A production system would require stronger monitoring, model governance, access control, audit logging, and security controls.
 
-Add more behavioural features
+---
 
-Improve network-based analysis
+## Business value
 
-Add stronger model validation
+The project is designed to help fraud and risk teams move from broad monitoring to focused investigation.
 
-Add better monitoring and audit features
+It can help answer questions such as:
 
-Links
+- Which transactions deserve attention first?
+- Which merchants have disproportionate chargeback exposure?
+- Which users show multiple risk signals?
+- Where are identity or velocity anomalies concentrated?
+- Which connected user–merchant groups deserve investigation?
+- Why was a transaction prioritised?
 
-GitHub:
-https://github.com/vikashkatiki/UPI-Fraud-Ring-Merchant-Analytics
+The underlying idea is simple:
 
-Live Dashboard:
-https://upi-fraud-ring-merchant-analytics--datasena.streamlit.app/
+```text
+Observe → Measure → Prioritise → Investigate → Explain
+```
 
-Team
+---
 
-This project was developed as a team submission for the FinTech & BFSI — UPI Fraud Ring & Merchant Analytics track.
+## Project objective
 
-Disclaimer
+The final goal is to build an investigation workflow where fraud analysts can move from **raw transaction data to explainable risk signals and actionable investigation leads** through a single, interactive interface.
 
-This project provides investigation-prioritisation signals. It does not prove that a transaction, user, merchant, or network is fraudulent.
+---
+
+## Links
+
+**GitHub Repository**  
+https://github.com/PavanBilla2/UPI-Fraud-Ring-Merchant-Analytics
+
+**Live Dashboard**  
+_Add your Streamlit deployment URL here._
+
+---
+
+## Team
+
+Developed as a team project for the **FinTech & BFSI — UPI Fraud Ring & Merchant Analytics** datathon track.
+
+---
+
+## Disclaimer
+
+This project provides analytical insights and investigation-prioritisation signals. It does **not** establish that a transaction, user, merchant, or network is fraudulent.
