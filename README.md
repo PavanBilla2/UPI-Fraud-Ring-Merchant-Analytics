@@ -253,7 +253,7 @@ UPI-Fraud-Ring-Merchant-Analytics/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/PavanBilla2/UPI-Fraud-Ring-Merchant-Analytics.git
+git clone https://github.com/vikashkatiki/UPI-Fraud-Ring-Merchant-Analytics.git
 cd UPI-Fraud-Ring-Merchant-Analytics
 ```
 
@@ -296,7 +296,7 @@ The application is deployed with **Streamlit Community Cloud**.
 Current deployment configuration:
 
 ```text
-Repository: PavanBilla2/UPI-Fraud-Ring-Merchant-Analytics
+Repository: vikashkatiki/UPI-Fraud-Ring-Merchant-Analytics
 Branch: main
 Entry point: app/app.py
 ```
@@ -350,7 +350,7 @@ The final goal is to build an investigation workflow where fraud analysts can mo
 ## Links
 
 **GitHub Repository**  
-https://github.com/PavanBilla2/UPI-Fraud-Ring-Merchant-Analytics
+https://github.com/vikashkatiki/UPI-Fraud-Ring-Merchant-Analytics
 
 **Live Dashboard**  
 _Add your Streamlit deployment URL here._
