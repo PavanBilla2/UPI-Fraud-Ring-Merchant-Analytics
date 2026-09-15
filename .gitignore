@@ -1,3 +1,10 @@
 .ipynb_checkpoints/
 __pycache__/
 *.pyc
+
+.streamlit/secrets.toml
+*.backup_before_ai
+
+.streamlit/secrets.toml
+
+app/.streamlit/secrets.toml
