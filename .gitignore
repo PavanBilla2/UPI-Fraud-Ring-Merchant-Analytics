@@ -1,10 +1,10 @@
-data/raw/
-data/processed/kyc_clean.csv
-data/processed/fact_transactions_enriched.csv
 .ipynb_checkpoints/
 __pycache__/
 *.pyc
-data/processed/chargebacks_clean.csv
-data/processed/merchants_clean.csv
-data/processed/network_edges.csv
-data/processed/transactions_clean.csv
+
+.streamlit/secrets.toml
+*.backup_before_ai
+
+.streamlit/secrets.toml
+
+app/.streamlit/secrets.toml
