@@ -353,7 +353,7 @@ The final goal is to build an investigation workflow where fraud analysts can mo
 https://github.com/vikashkatiki/UPI-Fraud-Ring-Merchant-Analytics
 
 **Live Dashboard**  
-_Add your Streamlit deployment URL here._
+https://upi-fraud-ring-merchant-analytics--datasena.streamlit.app/
 
 ---
 
